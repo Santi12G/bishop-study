@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Dashboard interactivo de redes neuronales: capítulos 3 y 4 de Bishop.">
+  <meta name="theme-color" content="#14264e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Bishop 3-4">
+  <title>Redes neuronales | Caps. 3 y 4</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero__inner">
+      <p class="eyebrow">Inteligencia artificial · Modelos de clasificación</p>
+      <h1>Supervised Learning</h1>
+      <p class="hero__lead">Modelos de aprendizaje supervisado, con Bishop capítulos 3–4 como ruta principal de redes neuronales.</p>
+      <div class="hero__meta">
+        <span>Capítulos 3 y 4</span>
+        <span>Modo exhaustivo</span>
+        <span id="progress-label">Progreso: 0%</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navegación principal">
+      <button class="nav-link is-active sidebar-root-link" data-target="supervised-learning"><span>SL</span> Supervised Learning</button>
+      <div class="sidebar-tree">
+        <details open>
+          <summary>1.1 Fundamentos</summary>
+          <button class="sidebar-tree-link" data-target="supervised-learning" data-anchor="fund-data">1.1.1 Datos y objetivos</button>
+          <button class="sidebar-tree-link" data-target="supervised-learning" data-anchor="fund-tasks">1.1.2 Clasificación y regresión</button>
+          <button class="sidebar-tree-link" data-target="supervised-learning" data-anchor="fund-evaluation">1.1.3 Evaluación de modelos</button>
+          <button class="sidebar-tree-link" data-target="supervised-learning" data-anchor="fund-generalization">1.1.4 Generalización</button>
+        </details>
+        <details open>
+          <summary>1.2 Linear Models</summary>
+          <button class="sidebar-tree-link" data-target="linear-models" data-anchor="linear-regression">1.2.1 Regresión lineal</button>
+          <button class="sidebar-tree-link" data-target="linear-models" data-anchor="linear-logistic">1.2.2 Regresión logística</button>
+          <button class="sidebar-tree-link" data-target="linear-models" data-anchor="linear-boundaries">1.2.3 Fronteras lineales</button>
+          <button class="sidebar-tree-link" data-target="linear-models" data-anchor="linear-weights">1.2.4 Pesos, sesgo y pérdida</button>
+          <button class="sidebar-tree-link" data-target="linear-models" data-anchor="linear-training">1.2.5 Entrenamiento</button>
+        </details>
+        <details>
+          <summary>1.3 KNN</summary>
+          <button class="sidebar-tree-link" data-target="knn-section" data-anchor="knn-distance">1.3.1 Distancias</button>
+          <button class="sidebar-tree-link" data-target="knn-section" data-anchor="knn-neighbors">1.3.2 Vecinos</button>
+          <button class="sidebar-tree-link" data-target="knn-section" data-anchor="knn-k">1.3.3 Elección de k</button>
+          <button class="sidebar-tree-link" data-target="knn-section" data-anchor="knn-tasks">1.3.4 Clasificación y regresión</button>
+          <button class="sidebar-tree-link" data-target="knn-section" data-anchor="knn-boundaries">1.3.5 Fronteras</button>
+        </details>
+        <details>
+          <summary>1.4 Decision Trees</summary>
+          <button class="sidebar-tree-link" data-target="trees-section" data-anchor="tree-nodes">1.4.1 Nodos y hojas</button>
+          <button class="sidebar-tree-link" data-target="trees-section" data-anchor="tree-splitting">1.4.2 División</button>
+          <button class="sidebar-tree-link" data-target="trees-section" data-anchor="tree-entropy">1.4.3 Entropía</button>
+          <button class="sidebar-tree-link" data-target="trees-section" data-anchor="tree-gain">1.4.4 Ganancia de información</button>
+          <button class="sidebar-tree-link" data-target="trees-section" data-anchor="tree-gini">1.4.5 Gini y poda</button>
+        </details>
+        <details>
+          <summary>1.5 Naïve Bayes</summary>
+          <button class="sidebar-tree-link" data-target="bayes-section" data-anchor="bayes-rule">1.5.1 Bayes y posterior</button>
+          <button class="sidebar-tree-link" data-target="bayes-section" data-anchor="bayes-independence">1.5.2 Independencia</button>
+          <button class="sidebar-tree-link" data-target="bayes-section" data-anchor="bayes-variants">1.5.3 Variantes y Laplace</button>
+          <button class="sidebar-tree-link" data-target="bayes-section" data-anchor="bayes-decision">1.5.4 Decisión</button>
+        </details>
+        <details open>
+          <summary>1.6 Neural Networks</summary>
+          <button class="sidebar-tree-link" data-target="module-4" data-anchor="nn-perceptron">1.6.1 Perceptrón</button>
+          <button class="sidebar-tree-link" data-target="module-4" data-anchor="nn-architecture">1.6.2 Arquitectura</button>
+          <details>
+            <summary>1.5.3 Activaciones</summary>
+            <button class="sidebar-tree-link" data-target="module-4" data-anchor="nn-sigmoid">1.6.3.1 Sigmoid</button>
+            <button class="sidebar-tree-link" data-target="module-4" data-anchor="nn-tanh">1.6.3.2 Tanh</button>
+            <button class="sidebar-tree-link" data-target="module-4" data-anchor="nn-relu">1.6.3.3 ReLU</button>
+          </details>
+          <button class="sidebar-tree-link" data-target="module-4" data-anchor="nn-training">1.6.4 Entrenamiento</button>
+          <button class="sidebar-tree-link" data-target="module-4" data-anchor="nn-math">1.6.5 Matemática avanzada</button>
+          <button class="sidebar-tree-link" data-target="module-4" data-anchor="nn-representation">1.6.6 Representación</button>
+        </details>
+        <details>
+          <summary>1.7 SVM</summary>
+          <button class="sidebar-tree-link" data-target="svm-section" data-anchor="svm-margin">1.7.1 Hiperplano y margen</button>
+          <button class="sidebar-tree-link" data-target="svm-section" data-anchor="svm-support">1.7.2 Vectores soporte</button>
+          <button class="sidebar-tree-link" data-target="svm-section" data-anchor="svm-regularization">1.7.3 Regularización</button>
+          <button class="sidebar-tree-link" data-target="svm-section" data-anchor="svm-kernels">1.7.4 Kernels</button>
+        </details>
+      </div>
+      <div class="sidebar__separator"></div>
+      <button class="nav-link" data-target="flashcards"><span>✦</span> Flashcards</button>
+      <button class="nav-link" data-target="error-console"><span>!</span> Errores frecuentes</button>
+      <button class="nav-link" data-target="exam"><span>✓</span> Simulacro</button>
+      <div class="sidebar__footer">Marca las tarjetas como estudiadas para seguir tu progreso.</div>
+    </aside>
+
+    <main class="content">
+      <section class="module module--tools is-visible" id="supervised-learning">
+        <div class="module-heading">
+          <div><p class="module-kicker">Ruta de aprendizaje</p><h2>Supervised Learning</h2></div>
+          <span class="module-icon">SL</span>
+        </div>
+        <p class="intro">El aprendizaje supervisado aprende una función a partir de ejemplos etiquetados. La imagen del profesor agrupa estos modelos; los capítulos 3–4 de Bishop desarrollan especialmente los discriminantes lineales y las redes neuronales.</p>
+        <div class="supervised-banner">
+          <div><strong>Supervised Learning</strong><span>Modelos de clasificación y predicción</span></div>
+          <strong>Bishop, Ch. 3–4</strong>
+        </div>
+        <article class="card section-development">
+          <h3>1.1 Fundamentos</h3>
+          <div class="grid grid--2">
+            <div><h4 id="fund-data">1.1.1 Datos, características y etiquetas</h4><p>Un patrón x contiene características; su etiqueta t indica la respuesta esperada. El conjunto supervisado está formado por pares (x, t).</p><h4 id="fund-tasks">1.1.2 Clasificación y regresión</h4><p>Clasificación predice categorías; regresión predice valores continuos.</p></div>
+            <div><h4 id="fund-evaluation">1.1.3 Evaluación</h4><p>Entrenamiento ajusta parámetros, validación elige configuraciones y prueba estima el desempeño final.</p><h4 id="fund-generalization">1.1.4 Generalización</h4><p>Un modelo útil funciona con datos nuevos; overfitting memoriza y underfitting simplifica demasiado.</p></div>
+          </div>
+          <p class="callout"><strong>Ejemplo:</strong> usa 70% de datos para entrenar, 15% para elegir hiperparámetros y 15% para medir generalización una sola vez.</p>
+        </article>
+        <div class="topic-grid">
+          <article class="topic-card topic-card--blue">
+            <div class="topic-card__top"><span class="topic-index">01</span><span class="topic-label">Bishop 3</span></div>
+            <h3>Linear Models</h3>
+            <p>Usan una combinación ponderada de las entradas para separar clases o predecir un valor.</p>
+            <div class="topic-example"><strong>Ejemplo:</strong> clasificar flores con <code>y = w₁·largo + w₂·ancho + w₀</code>. Si y ≥ 0, clase A; si y &lt; 0, clase B.</div>
+            <p class="topic-link">Relacionado con: discriminantes lineales, logística, mínimos cuadrados, Fisher y perceptrón.</p>
+            <button class="button button--ghost" data-jump="linear-models">Ver Linear Models</button>
+          </article>
+          <article class="topic-card topic-card--purple">
+            <div class="topic-card__top"><span class="topic-index">02</span><span class="topic-label">Contexto</span></div>
+            <h3>KNN</h3>
+            <p>Clasifica un dato según las etiquetas de sus k vecinos más cercanos. No aprende una frontera paramétrica explícita.</p>
+            <div class="topic-example"><strong>Ejemplo:</strong> para una flor nueva, sus 3 vecinos son A, A y B; KNN predice la clase A.</div>
+            <p class="topic-link">Complemento del mapa de aprendizaje supervisado.</p>
+            <button class="button button--ghost" data-jump="knn-section">Desarrollar KNN</button>
+          </article>
+          <article class="topic-card topic-card--orange">
+            <div class="topic-card__top"><span class="topic-index">03</span><span class="topic-label">Contexto</span></div>
+            <h3>Decision Trees</h3>
+            <p>Dividen el espacio mediante preguntas sucesivas sobre las características hasta llegar a una predicción.</p>
+            <div class="topic-example"><strong>Ejemplo:</strong> ¿peso &gt; 10 kg? → ¿color rojo? → clasificar una fruta como manzana o naranja.</div>
+            <p class="topic-link">Las hojas representan regiones de decisión; a diferencia del perceptrón, sus fronteras son cortes por reglas.</p>
+            <button class="button button--ghost" data-jump="trees-section">Desarrollar árboles</button>
+          </article>
+          <article class="topic-card topic-card--green">
+            <div class="topic-card__top"><span class="topic-index">04</span><span class="topic-label">Contexto</span></div>
+            <h3>Naive Bayes</h3>
+            <p>Calcula la probabilidad de cada clase usando Bayes y supone independencia condicional entre las características.</p>
+            <div class="topic-example"><strong>Ejemplo:</strong> en un correo con “premio” y “gratis”, comparar P(spam|palabras) con P(no spam|palabras).</div>
+            <p class="topic-link">Relacionado conceptualmente con las probabilidades posteriores de la discriminación logística y las entradas Bernoulli.</p>
+            <button class="button button--ghost" data-jump="bayes-section">Desarrollar Naive Bayes</button>
+          </article>
+          <article class="topic-card topic-card--red">
+            <div class="topic-card__top"><span class="topic-index">05</span><span class="topic-label">Bishop 3–4</span></div>
+            <h3>Neural Networks</h3>
+            <p>Aprenden pesos y, en el caso multicapa, representaciones internas no lineales mediante unidades ocultas.</p>
+            <div class="topic-example"><strong>Ejemplo:</strong> una red con una capa oculta aprende XOR, que un discriminante lineal no puede separar.</div>
+            <p class="topic-link">Tema central de esta página: perceptrón, MLP, activaciones, retropropagación y Hessiana.</p>
+            <button class="button button--primary" data-jump="module-4">Desarrollar Neural Networks</button>
+          </article>
+          <article class="topic-card topic-card--dark">
+            <div class="topic-card__top"><span class="topic-index">06</span><span class="topic-label">Contexto</span></div>
+            <h3>SVM</h3>
+            <p>Busca una frontera con margen máximo entre clases y puede usar funciones kernel para fronteras no lineales.</p>
+            <div class="topic-example"><strong>Ejemplo:</strong> elegir la línea que deja la mayor distancia posible a los puntos más cercanos de cada clase.</div>
+            <p class="topic-link">Comparte con Fisher y los discriminantes la idea geométrica de separar clases mediante fronteras.</p>
+            <button class="button button--ghost" data-jump="svm-section">Desarrollar SVM</button>
+          </article>
+        </div>
+        <div class="comparison-card">
+          <h3>¿Qué corresponde directamente a Bishop, capítulos 3–4?</h3>
+          <div class="comparison-row"><span class="comparison-primary">Directamente desarrollado</span><strong>Linear Models · Neural Networks</strong><p>Discriminantes lineales, mínimos cuadrados, Fisher, perceptrón y MLP.</p></div>
+          <div class="comparison-row"><span class="comparison-secondary">Relacionado como contexto</span><strong>KNN · Decision Trees · Naive Bayes · SVM</strong><p>Son modelos supervisados importantes, pero no se desarrollan en el material de estos capítulos.</p></div>
+        </div>
+      </section>
+
+      <section class="module module--blue" id="linear-models">
+        <div class="module-heading"><div><p class="module-kicker">Supervised model 01</p><h2>Linear Models</h2></div><span class="module-icon">01</span></div>
+        <p class="intro">Los modelos lineales convierten cada característica en una contribución ponderada. Son la primera herramienta para entender clasificación, regresión y fronteras de decisión.</p>
+        <h3 class="section-title" id="linear-boundaries">1.2.1–1.2.5 Conceptos y procedimiento</h3>
+        <div class="skill-grid">
+          <div class="skill-box"><strong>Habilidad</strong><span>Traducir un problema a una ecuación, interpretar los pesos y decidir si una frontera lineal es suficiente.</span></div>
+          <div class="skill-box"><strong>Cuándo usarlo</strong><span>Cuando la relación es aproximadamente lineal, se necesita explicar la decisión o se requiere un modelo rápido.</span></div>
+        </div>
+        <div class="grid grid--2">
+          <article class="card" id="linear-logistic"><h3>1.2.2 Clasificación logística</h3><div class="formula">y = wᵀx + w₀</div><p>Si y ≥ 0 se predice C₁; si y &lt; 0, C₂. La sigmoide transforma el resultado en una probabilidad:</p><div class="formula">P(C₁|x) = 1 / (1 + e<sup>−y</sup>)</div></article>
+          <article class="card" id="linear-regression"><h3>1.2.1 Regresión lineal</h3><div class="formula">ŷ = w₀ + w₁x₁ + ··· + w<sub>d</sub>x<sub>d</sub></div><p>Los pesos indican cuánto cambia la salida cuando una característica aumenta una unidad, manteniendo las demás constantes.</p></article>
+        </div>
+        <article class="card practice-card" id="linear-training">
+          <div class="card-heading"><h3 id="linear-weights">1.2.4 Pesos, sesgo y pérdida · Ejemplo superior</h3><span class="tag">Resuelto</span></div>
+          <p>Usamos ingreso normalizado x₁ = 0.8, historial x₂ = 0.6, <strong>w = (2, 1)</strong> y <strong>w₀ = −1.5</strong>.</p>
+          <div class="formula">y = 2(0.8) + 1(0.6) − 1.5 = 0.7</div>
+          <p>Como y &gt; 0, el modelo clasifica como “aprobar”. La probabilidad logística es aproximadamente <strong>0.668</strong>. El ingreso tiene el doble de influencia que el historial porque su peso es mayor.</p>
+          <ol class="steps"><li>Normaliza las características.</li><li>Calcula el producto peso-entrada y suma el sesgo.</li><li>Aplica umbral o sigmoide.</li><li>Interpreta los pesos y revisa errores.</li></ol>
+        </article>
+        <article class="card exercise-card"><h3>Reto de dominio</h3><p>Construye un clasificador para una planta con x₁ = longitud y x₂ = ancho. Elige pesos, calcula la frontera y explica qué característica domina. Después prueba qué ocurre al cambiar w₀.</p></article>
+      </section>
+
+      <section class="module module--purple" id="knn-section">
+        <div class="module-heading"><div><p class="module-kicker">Supervised model 02</p><h2>KNN · K-Nearest Neighbors</h2></div><span class="module-icon">02</span></div>
+        <p class="intro">KNN clasifica usando la proximidad: guarda los datos etiquetados y consulta los k ejemplos más cercanos cuando llega un patrón nuevo.</p>
+        <h3 class="section-title" id="knn-tasks">1.3.1–1.3.5 Conceptos y procedimiento</h3>
+        <div class="skill-grid"><div class="skill-box"><strong>Habilidad</strong><span>Calcular distancias, elegir k, votar y detectar cuándo una escala desigual distorsiona el resultado.</span></div><div class="skill-box"><strong>Decisiones</strong><span>k pequeño captura detalles pero es sensible al ruido; k grande suaviza pero puede borrar fronteras locales.</span></div></div>
+        <article class="card" id="knn-distance"><h3>1.3.1 Distancias y procedimiento</h3><ol class="steps"><li>Normaliza las variables.</li><li>Calcula la distancia al nuevo punto, normalmente euclídea.</li><li>Ordena las distancias y conserva los k vecinos.</li><li>Vota la clase mayoritaria o promedia sus valores en regresión.</li></ol><div class="formula" id="knn-boundaries">d(x,z) = √Σᵢ(xᵢ − zᵢ)²</div></article>
+        <article class="card practice-card" id="knn-neighbors"><div class="card-heading"><h3>1.3.2 Vecinos · Ejemplo superior</h3><span class="tag">k = 5</span></div><p>Para una flor nueva x = (5.1, 3.5), las distancias a los ejemplos más cercanos son:</p><table><thead><tr><th>Vecino</th><th>Distancia</th><th>Clase</th></tr></thead><tbody><tr><td>1</td><td>0.18</td><td>A</td></tr><tr><td>2</td><td>0.24</td><td>A</td></tr><tr><td>3</td><td>0.31</td><td>B</td></tr><tr><td>4</td><td>0.36</td><td>A</td></tr><tr><td>5</td><td>0.42</td><td>B</td></tr></tbody></table><p>El voto es A = 3 y B = 2; por tanto KNN predice <strong>A</strong>. Si la longitud estuviera en centímetros y el ancho en milímetros, primero habría que normalizar.</p></article>
+        <article class="card exercise-card" id="knn-k"><h3>1.3.3 Elección de k · Reto de dominio</h3><p>Compara k = 1, 3 y 5 para un punto cerca de la frontera. Explica cuál resultado cambia con el ruido y qué k elegirías para un conjunto pequeño.</p></article>
+      </section>
+
+      <section class="module module--orange" id="trees-section">
+        <div class="module-heading"><div><p class="module-kicker">Supervised model 03</p><h2>Decision Trees</h2></div><span class="module-icon">03</span></div>
+        <p class="intro">Un árbol divide el espacio con preguntas. Cada nodo elige una característica y un umbral; cada hoja entrega una clase o un valor.</p>
+        <h3 class="section-title" id="tree-nodes">1.4.1–1.4.5 Conceptos y procedimiento</h3>
+        <div class="skill-grid"><div class="skill-box"><strong>Habilidad</strong><span>Convertir datos en reglas, leer una ruta de decisión y controlar profundidad para evitar sobreajuste.</span></div><div class="skill-box"><strong>Criterio</strong><span>Una división es buena cuando deja grupos más puros. Se puede medir con entropía o índice Gini.</span></div></div>
+        <div class="grid grid--2"><article class="card" id="tree-entropy"><h3>1.4.3 Entropía</h3><div class="formula">H(S) = −Σ<sub>c</sub> p(c) log₂ p(c)</div><p>Vale 0 cuando todos los ejemplos pertenecen a una sola clase. La ganancia de información compara la impureza antes y después de dividir.</p></article><article class="card" id="tree-gini"><h3>1.4.5 Índice Gini y poda</h3><div class="formula">Gini(S) = 1 − Σ<sub>c</sub>p(c)²</div><p>También busca nodos puros. El árbol escoge el umbral que más reduce la impureza.</p></article></div>
+        <article class="card practice-card" id="tree-splitting"><div class="card-heading"><h3>1.4.2 División · Ejemplo superior: aprobar una solicitud</h3><span class="tag">Ruta interpretable</span></div><p>El árbol aprende:</p><div class="tree-diagram"><div class="tree-node">Ingreso &gt; 2.000</div><div class="tree-branches"><div><span>Sí</span><div class="tree-node tree-node--leaf">¿Historial bueno?</div><small>Sí → aprobar<br>No → revisar</small></div><div><span>No</span><div class="tree-node tree-node--leaf">rechazar</div></div></div></div><p>Para una persona con ingreso 2.500 e historial bueno, seguimos “Sí → Sí” y predecimos <strong>aprobar</strong>. La explicación es una ruta, no una ecuación global.</p></article>
+        <article class="card exercise-card" id="tree-gain"><h3>1.4.4 Ganancia de información · Reto de dominio</h3><p>Diseña un árbol de tres preguntas para clasificar frutas usando peso, color y textura. Indica qué regla pondrías en la raíz y por qué.</p></article>
+      </section>
+
+      <section class="module module--green" id="bayes-section">
+        <div class="module-heading"><div><p class="module-kicker">Supervised model 04</p><h2>Naive Bayes</h2></div><span class="module-icon">04</span></div>
+        <p class="intro">Naive Bayes combina la probabilidad de una clase con la evidencia observada. Su supuesto “naive” considera independientes las características una vez conocida la clase.</p>
+        <h3 class="section-title" id="bayes-independence">1.5.1–1.5.4 Conceptos y procedimiento</h3>
+        <div class="skill-grid"><div class="skill-box"><strong>Habilidad</strong><span>Construir probabilidades a partir de frecuencias, aplicar Bayes y comparar puntuaciones de clases.</span></div><div class="skill-box"><strong>Precaución</strong><span>Las probabilidades cero requieren suavizado de Laplace; la independencia es una aproximación, no una verdad universal.</span></div></div>
+        <article class="card" id="bayes-rule"><h3>1.5.1 Regla de Bayes y posterior</h3><div class="formula">P(C|x) ∝ P(C) ∏ᵢP(xᵢ|C)</div><p>Se calcula una puntuación por clase y se elige la mayor. El factor de evidencia P(x) es común a todas las clases y puede omitirse al comparar.</p></article>
+        <article class="card practice-card" id="bayes-decision"><div class="card-heading"><h3>1.5.4 Decisión · Ejemplo superior: detectar spam</h3><span class="tag">Bernoulli</span></div><p>Supón P(spam) = 0.4, P(no spam) = 0.6. Para las palabras “gratis” y “premio”:</p><div class="grid grid--2"><div class="formula formula--small">Spam: 0.4 × 0.8 × 0.7 = <strong>0.224</strong></div><div class="formula formula--small">No spam: 0.6 × 0.1 × 0.05 = <strong>0.003</strong></div></div><p>Como 0.224 &gt; 0.003, clasificamos el correo como <strong>spam</strong>. Normalizando, P(spam|x) ≈ 0.987.</p><ol class="steps"><li>Estima el prior de cada clase.</li><li>Estima la probabilidad de cada característica por clase.</li><li>Multiplica y compara.</li><li>Aplica Laplace si alguna frecuencia es cero.</li></ol></article>
+        <article class="card exercise-card" id="bayes-variants"><h3>1.5.3 Variantes y Laplace · Reto de dominio</h3><p>Calcula las puntuaciones de “urgente” y “reunión” para spam/no spam. Explica qué supuesto de independencia estás haciendo.</p></article>
+      </section>
+
+      <section class="module module--dark" id="svm-section">
+        <div class="module-heading"><div><p class="module-kicker">Supervised model 06</p><h2>Support Vector Machines</h2></div><span class="module-icon">06</span></div>
+        <p class="intro">SVM busca el hiperplano que separa las clases con el margen más amplio. Los puntos que tocan el margen son los vectores soporte y determinan la frontera.</p>
+        <h3 class="section-title" id="svm-margin">1.7.1–1.7.4 Conceptos y procedimiento</h3>
+        <div class="skill-grid"><div class="skill-box"><strong>Habilidad</strong><span>Identificar la frontera, razonar con margen y distinguir separación lineal de separación mediante kernel.</span></div><div class="skill-box"><strong>Idea geométrica</strong><span>Una frontera robusta no solo clasifica: deja la mayor distancia posible a los ejemplos más cercanos.</span></div></div>
+        <article class="card" id="svm-support"><h3>1.7.2 Margen y vectores soporte</h3><div class="formula">margen = 2 / ‖w‖</div><p>Para etiquetas t ∈ {−1,+1}, la condición ideal es t(wᵀx + b) ≥ 1. Los ejemplos con igualdad son los que fijan el margen.</p></article>
+        <article class="card practice-card" id="svm-kernels"><div class="card-heading"><h3>1.7.4 Kernels · Ejemplo superior: elegir una frontera</h3><span class="tag">Máximo margen</span></div><p>Dos posibles líneas separan correctamente dos clases. La línea A deja 0.4 unidades al punto más cercano; la línea B deja 0.9. SVM elige <strong>B</strong>, aunque ambas tengan cero errores de entrenamiento.</p><div class="svm-demo"><div class="svm-axis"><span class="svm-line svm-line--a"></span><span class="svm-line svm-line--b"></span><i class="point p1"></i><i class="point p2"></i><i class="point p3"></i><i class="point p4"></i></div><div><strong>A:</strong> margen 0.4<br><strong>B:</strong> margen 0.9 → elegir B</div></div><p>Si los datos no son linealmente separables, un <strong>kernel</strong> transforma implícitamente el espacio para construir una frontera no lineal.</p></article>
+        <article class="card exercise-card" id="svm-regularization"><h3>1.7.3 Regularización · Reto de dominio</h3><p>Explica por qué una frontera con cero errores puede ser peor que otra con el mismo error pero mayor margen. Relaciona tu respuesta con generalización y ruido.</p></article>
+      </section>
+
+      <section class="module module--blue" id="module-1">
+        <div class="module-heading">
+          <div><p class="module-kicker">Módulo 1</p><h2>Redes de una capa</h2></div>
+          <span class="module-icon">01</span>
+        </div>
+        <p class="intro">Una única capa de pesos adaptativos transforma las entradas en decisiones de clase. La frontera puede ser lineal en el espacio original o no lineal después de aplicar funciones base.</p>
+
+        <div class="grid grid--2">
+          <article class="card" id="nn-architecture">
+            <h3>Discriminantes lineales</h3>
+            <p>Para dos clases, la función discriminante es:</p>
+            <div class="formula">y(x) = wᵀx + w₀</div>
+            <ul class="fact-list">
+              <li>La frontera <strong>y(x) = 0</strong> es un hiperplano de dimensión d − 1.</li>
+              <li><strong>w</strong> define la orientación y <strong>w₀</strong> controla el desplazamiento.</li>
+              <li>La distancia orientada al origen es <strong>l = −w₀ / ‖w‖</strong>.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Multiclase y logística</h3>
+            <div class="formula">yₖ(x) = wₖᵀx + wₖ₀</div>
+            <p>Se elige la clase k cuando su discriminante supera al de todas las demás clases. Las regiones resultantes son convexas.</p>
+            <div class="formula">g(a) = 1 / (1 + e<sup>−a</sup>)</div>
+            <p>La sigmoide permite interpretar la salida como una probabilidad posterior.</p>
+          </article>
+        </div>
+
+        <div class="grid grid--2">
+          <article class="card card--accent">
+            <h3>Representación con sesgo</h3>
+            <p>Se añade la entrada ficticia x₀ = 1 para incorporar el sesgo al vector de pesos:</p>
+            <div class="formula">x̃ = (1, x), &nbsp; w̃ = (w₀, w), &nbsp; y(x) = w̃ᵀx̃</div>
+          </article>
+          <article class="card">
+            <h3>Entradas binarias</h3>
+            <p>Un patrón binario puede modelarse con una distribución de Bernoulli:</p>
+            <div class="formula formula--small">p(x|Cₖ) = ∏ μₖᵢ<sup>xᵢ</sup>(1 − μₖᵢ)<sup>1−xᵢ</sup></div>
+          </article>
+        </div>
+
+        <article class="card">
+          <div class="card-heading"><h3>Separabilidad y extensiones</h3><span class="tag">Conceptos clave</span></div>
+          <div class="concept-grid">
+            <div><h4>Separabilidad lineal</h4><p>Existe un hiperplano que clasifica correctamente el 100% de los patrones de entrenamiento.</p></div>
+            <div><h4>XOR</h4><p>Los cuatro puntos XOR no pueden separarse con una sola línea. Es el límite clásico de un discriminante lineal.</p></div>
+            <div><h4>Funciones base</h4><p>Con φ(x), la frontera puede ser no lineal en x, aunque continúa siendo lineal en el espacio transformado.</p></div>
+          </div>
+          <div class="calculator">
+            <div>
+              <h4>Teorema de Cover</h4>
+              <p class="muted">Probabilidad de separabilidad de N puntos aleatorios en d dimensiones.</p>
+            </div>
+            <label>N (patrones)<input id="cover-n" type="number" min="1" value="6"></label>
+            <label>d (dimensiones)<input id="cover-d" type="number" min="0" value="2"></label>
+            <output id="cover-result" class="result">F(N,d) = 0.5000</output>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-heading"><h3>Teorema de Cover: casos límite</h3><span class="tag">Para examen</span></div>
+          <p>Para N ≤ d + 1, todas las dicotomías están separadas linealmente y <strong>F(N,d) = 1</strong>. Cuando N = 2(d + 1), la fracción es exactamente 0.5.</p>
+          <p>El problema XOR es el caso mínimo que muestra que una red de una sola capa no puede representar todas las asignaciones de clase. En dimensiones superiores, la misma dificultad aparece como problema de paridad.</p>
+        </article>
+      </section>
+
+      <section class="module module--yellow" id="module-2">
+        <div class="module-heading">
+          <div><p class="module-kicker">Módulo 2</p><h2>Optimización de pesos</h2></div><span class="module-icon">02</span>
+        </div>
+        <div class="grid grid--2">
+          <article class="card">
+            <h3>Mínimos cuadrados</h3>
+            <p>Se minimiza el error cuadrático entre la salida y los objetivos:</p>
+            <div class="formula">E(w) = ½ ΣₙΣₖ (yₖ(xⁿ) − tₖⁿ)²</div>
+            <p>La solución es la proyección ortogonal de T sobre el subespacio generado por Φ.</p>
+            <div class="formula">Wᵀ = Φ<sup>†</sup>T</div>
+            <p class="callout"><strong>Estabilidad:</strong> usa SVD cuando ΦᵀΦ sea singular o N &lt; M. Evita pesos enormes y cancelación numérica.</p>
+          </article>
+          <article class="card">
+            <h3>Regla delta</h3>
+            <p>Para una red lineal, el descenso de gradiente estocástico actualiza:</p>
+            <div class="formula">Δwₖⱼ = η(tₖⁿ − yₖⁿ)φⱼⁿ</div>
+            <p>Con una activación no lineal se incluye la derivada de la activación:</p>
+            <div class="formula">Δw ∝ (t − y)g′(a)φ</div>
+          </article>
+        </div>
+        <article class="card">
+          <h3>Discriminante lineal de Fisher</h3>
+          <p>Busca una proyección con gran separación entre clases y poca dispersión dentro de cada clase.</p>
+          <div class="grid grid--3 formula-grid">
+            <div><span class="formula-label">Entre clases</span><div class="formula">S<sub>B</sub></div></div>
+            <div><span class="formula-label">Dentro de clases</span><div class="formula">S<sub>W</sub></div></div>
+            <div><span class="formula-label">Criterio</span><div class="formula">J(w) = wᵀS<sub>B</sub>w / wᵀS<sub>W</sub>w</div></div>
+          </div>
+          <p class="callout">En dos clases, la dirección óptima es <strong>w ∝ S<sub>W</sub><sup>−1</sup>(m₂ − m₁)</strong>. Para c clases, Fisher extrae como máximo c − 1 características.</p>
+          <div class="grid grid--2">
+            <div class="mini-panel"><h4>Dos clases</h4><div class="formula formula--small">S<sub>W</sub> = Σ<sub>C₁</sub>(x−m₁)(x−m₁)ᵀ + Σ<sub>C₂</sub>(x−m₂)(x−m₂)ᵀ</div><div class="formula formula--small">S<sub>B</sub> = (m₂−m₁)(m₂−m₁)ᵀ</div></div>
+            <div class="mini-panel"><h4>Varias clases</h4><div class="formula formula--small">J(W) = Tr{(WS<sub>W</sub>Wᵀ)<sup>−1</sup>(WS<sub>B</sub>Wᵀ)}</div><p>El rango máximo de S<sub>B</sub> es c − 1, así que ese es el límite de dimensiones discriminantes.</p></div>
+          </div>
+          <p class="callout">Con objetivos alternos <strong>t = N/N₁</strong> para C₁ y <strong>t = −N/N₂</strong> para C₂, mínimos cuadrados produce la misma dirección de pesos que Fisher.</p>
+          <div class="fisher-demo">
+            <label>Separación entre medias <input id="fisher-between" type="range" min="0" max="10" step="0.1" value="6"><output id="fisher-between-value">6.0</output></label>
+            <label>Dispersión intra-clase <input id="fisher-within" type="range" min="0.1" max="10" step="0.1" value="2"><output id="fisher-within-value">2.0</output></label>
+            <div class="fisher-score">J(w) ≈ <strong id="fisher-result">18.00</strong></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="module module--red" id="module-3">
+        <div class="module-heading">
+          <div><p class="module-kicker">Módulo 3</p><h2>El perceptrón clásico</h2></div><span class="module-icon">03</span>
+        </div>
+        <div class="grid grid--2">
+          <article class="card">
+            <h3>Rosenblatt y Heaviside</h3>
+            <p>El perceptrón combina funciones base fijas con una activación de umbral. No minimiza el error cuadrático: optimiza un criterio sobre los patrones mal clasificados.</p>
+            <div class="formula formula--small">E<sup>perc</sup>(w) = −Σ<sub>φⁿ∈M</sub> wᵀ(φⁿtⁿ)</div>
+          </article>
+          <article class="card">
+            <h3>Teorema de convergencia</h3>
+            <p>Si los datos son linealmente separables, el algoritmo encuentra una solución en un número finito de actualizaciones. En datos no separables, no existe una frontera perfecta y el entrenamiento no converge a cero.</p>
+          </article>
+        </div>
+        <article class="card">
+          <h3>Simulador de actualización</h3>
+          <p>Presenta un patrón y observa cómo cambia el vector de pesos. La etiqueta usa +1 para C₁ y −1 para C₂.</p>
+          <div class="perceptron-controls">
+            <label>x₁ <input id="px1" type="number" step="0.1" value="1"></label>
+            <label>x₂ <input id="px2" type="number" step="0.1" value="1"></label>
+            <label>t <select id="pt"><option value="1">C₁ (+1)</option><option value="-1">C₂ (−1)</option></select></label>
+            <label>η <input id="peta" type="number" min="0.01" step="0.05" value="0.2"></label>
+            <button class="button button--dark" id="perceptron-step">Presentar patrón</button>
+            <button class="button button--ghost" id="perceptron-reset">Reiniciar</button>
+          </div>
+          <div class="perceptron-status"><span id="perceptron-output">Salida: 1 · correcto</span><span id="perceptron-weights">w = [0.00, 0.00, 0.00]</span></div>
+          <div class="perceptron-bar"><span id="perceptron-bar-fill"></span></div>
+        </article>
+        <div class="grid grid--2">
+          <article class="card">
+            <h3>Convergencia y algoritmo pocket</h3>
+            <p>La regla de Rosenblatt converge en un número finito de pasos únicamente cuando existe un hiperplano que separa los datos. Con datos no separables, como XOR, los pesos oscilan indefinidamente.</p>
+            <p class="callout">El algoritmo <strong>pocket</strong> conserva la mejor solución encontrada para trabajar con datos no separables, aunque no crea una separación perfecta.</p>
+          </article>
+          <article class="card">
+            <h3>Limitaciones de Minsky y Papert</h3>
+            <p>Con características locales fijas, un perceptrón no puede resolver problemas de paridad ni decidir si una forma topológica está simplemente conectada o desconectada.</p>
+            <p>La salida natural es permitir que las características se adapten durante el aprendizaje: aparecen las redes multicapa.</p>
+          </article>
+        </div>
+        <article class="card">
+          <h3>Ejemplo resuelto: actualización del perceptrón</h3>
+          <p>Con <strong>w = (0,0,0)</strong>, η = 1, entrada aumentada <strong>x̃ = (1, 0.5, 0.5)</strong> y objetivo t = +1, el patrón se clasifica erróneamente si el empate se asigna a C₂.</p>
+          <div class="formula">w<sup>nuevo</sup> = w<sup>viejo</sup> + ηx̃t = (0,0,0) + (1,0.5,0.5) = (1,0.5,0.5)</div>
+        </article>
+      </section>
+
+      <section class="module module--green" id="module-4">
+        <div class="module-heading">
+          <div><p class="module-kicker">Módulo 4</p><h2>Perceptrón multicapa</h2></div><span class="module-icon">04</span>
+        </div>
+        <p class="intro">Un MLP apila capas de transformaciones lineales y activaciones no lineales para construir fronteras complejas. La no linealidad es esencial: sin ella, varias capas equivalen a una sola transformación lineal.</p>
+        <h3 class="section-title" id="nn-perceptron">1.6.1–1.6.6 Desarrollo de Neural Networks</h3>
+        <div class="subsection-strip">
+          <span>1.5.1 Perceptrón</span><span>1.5.2 Arquitectura</span><span>1.5.3 Activaciones</span><span>1.5.4 Entrenamiento</span><span>1.5.5 Matemática</span><span>1.5.6 Representación</span>
+        </div>
+        <div class="architecture" aria-label="Arquitectura de un perceptrón multicapa">
+          <div class="layer"><span>Entrada</span><i></i><i></i><i></i></div><b>→</b><div class="layer layer--hidden"><span>Oculta</span><i></i><i></i><i></i><i></i></div><b>→</b><div class="layer"><span>Salida</span><i></i><i></i></div>
+        </div>
+        <div class="grid grid--3">
+          <article class="card" id="nn-training"><h3>1.6.4 Activaciones y entrenamiento</h3><p>Sigmoide, tanh o ReLU introducen no linealidad. La elección afecta gradientes y velocidad de aprendizaje.</p></article>
+          <article class="card" id="nn-math"><h3>1.6.5 Retropropagación y matemática</h3><p>Calcula el gradiente del error capa por capa usando la regla de la cadena y ajusta los pesos con descenso de gradiente.</p></article>
+          <article class="card" id="nn-representation"><h3>1.6.6 Representación · XOR resuelto</h3><p>Una capa oculta permite representar regiones no convexas y resolver problemas que un perceptrón simple no puede separar.</p></article>
+        </div>
+        <article class="card">
+          <h3>Topologías y decisiones</h3>
+          <table><thead><tr><th>Topología</th><th>Uso</th><th>Riesgo</th></tr></thead><tbody>
+            <tr><td>Una capa</td><td>Problemas linealmente separables</td><td>No puede modelar XOR</td></tr>
+            <tr><td>Multicapa</td><td>Fronteras no lineales y composición de características</td><td>Sobreajuste o gradientes inestables</td></tr>
+            <tr><td>Salida logística</td><td>Clasificación binaria probabilística</td><td>Interpretación incorrecta si no se calibra</td></tr>
+          </tbody></table>
+        </article>
+        <article class="card">
+          <div class="card-heading"><h3>4.1 Mapeos feed-forward</h3><span class="tag">Capas adaptativas</span></div>
+          <p>Una red feed-forward no contiene ciclos: la información fluye desde la entrada hacia la salida. Las unidades intermedias son unidades ocultas y sus parámetros sí se adaptan durante el entrenamiento.</p>
+          <div class="formula formula--small">a<sub>j</sub> = Σ<sub>i</sub>w<sup>(1)</sup><sub>ji</sub>x<sub>i</sub> + w<sup>(1)</sup><sub>j0</sub>;&nbsp;&nbsp; z<sub>j</sub> = g(a<sub>j</sub>)</div>
+          <div class="formula formula--small">y<sub>k</sub> = ĝ(Σ<sub>j</sub>w<sup>(2)</sup><sub>kj</sub>z<sub>j</sub> + w<sup>(2)</sup><sub>k0</sub>)</div>
+          <p>Las topologías generales pueden incluir conexiones que saltan capas. Los diagramas de Hinton representan el signo del peso con el color y su magnitud con el tamaño.</p>
+        </article>
+        <article class="card">
+          <div class="card-heading"><h3>4.2 Unidades de umbral</h3><span class="tag">Geometría</span></div>
+          <div class="grid grid--3">
+            <div><h4>Entradas binarias</h4><p>Con entradas 0/1 se computan funciones booleanas. Una unidad oculta por patrón puede memorizar cualquier función, pero puede requerir hasta <strong>2<sup>d</sup></strong> unidades y no generaliza.</p></div>
+            <div><h4>Una capa</h4><p>Sin unidades ocultas, solo se forman fronteras de decisión dadas por hiperplanos.</p></div>
+            <div><h4>Dos capas</h4><p>Una capa oculta y una salida pueden combinar hiperplanos con AND para delimitar regiones convexas cerradas.</p></div>
+          </div>
+          <div class="callout"><strong>Tres capas:</strong> dos capas ocultas permiten combinar regiones convexas con OR; así se forman regiones no convexas y múltiples regiones disjuntas.</div>
+        </article>
+        <article class="card">
+          <h3>Ejemplo resuelto: triángulo con AND</h3>
+          <p>Tres unidades ocultas trazan los límites izquierdo, derecho e inferior. Cada una produce 1 cuando el punto está del lado correcto. La salida exige las tres activaciones simultáneamente: es una operación AND que delimita el triángulo.</p>
+        </article>
+        <article class="card">
+          <div class="card-heading"><h3 id="nn-sigmoid">1.6.3.1 Sigmoid</h3><span class="tag">Activaciones diferenciables</span></div>
+          <p>Las funciones de umbral discontinuas se sustituyen por activaciones continuas y diferenciables para poder entrenar mediante derivadas y retropropagación.</p>
+          <div class="grid grid--2">
+            <div><h4>Logística</h4><div class="formula">g(a) = 1 / (1 + e<sup>−a</sup>)</div><p>Su salida está en el intervalo (0, 1).</p></div>
+            <div><h4 id="nn-tanh">1.6.3.2 Tanh</h4><div class="formula">g(a) = tanh(a) = (e<sup>a</sup> − e<sup>−a</sup>) / (e<sup>a</sup> + e<sup>−a</sup>)</div><p>Su salida es simétrica y está entre −1 y 1.</p></div>
+            <div><h4 id="nn-relu">1.6.3.3 ReLU</h4><div class="formula">g(a) = max(0, a)</div><p>Anula valores negativos y conserva los positivos; suele facilitar el entrenamiento de redes profundas.</p></div>
+          </div>
+          <p class="callout">La derivada puede expresarse usando la propia salida de la unidad, simplificando el cálculo del gradiente.</p>
+        </article>
+        <article class="card">
+          <div class="card-heading"><h3>4.4 Simetrías en el espacio de pesos</h3><span class="tag">Equivalencia funcional</span></div>
+          <p>Distintas configuraciones de pesos pueden producir exactamente el mismo mapeo entrada-salida.</p>
+          <div class="concept-grid">
+            <div><h4>Permutación</h4><p>Intercambiar dos unidades ocultas y reordenar sus conexiones de salida no cambia la función. Con M unidades existen <strong>M!</strong> permutaciones equivalentes.</p></div>
+            <div><h4>Inversión de signos</h4><p>Con activaciones simétricas como tanh, cambiar los signos de los pesos de entrada y salida de una unidad puede conservar la función.</p></div>
+            <div><h4>Consecuencia</h4><p>El espacio de error contiene múltiples mínimos globales equivalentes. La predicción no cambia, aunque el análisis de pesos se complique.</p></div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-heading"><h3>4.5 Redes de orden superior</h3><span class="tag">Productos cruzados</span></div>
+          <p>Introducen interacciones entre variables para representar invariancias complejas, como rotaciones o escalas, sin depender necesariamente de una red profunda.</p>
+          <div class="formula">y(x) = w₀ + Σᵢwᵢxᵢ + Σᵢⱼwᵢⱼxᵢxⱼ</div>
+          <p>Al transformar explícitamente el espacio de entrada con términos de segundo orden, una sola capa adaptativa puede resolver problemas no lineales como XOR.</p>
+        </article>
+        <article class="card">
+          <div class="card-heading"><h3>4.6 Regresión <em>projection pursuit</em></h3><span class="tag">Regresión no paramétrica</span></div>
+          <p>Proyecta los datos multidimensionales sobre direcciones <strong>wᵀx</strong> y aplica funciones no lineales unidimensionales para aproximar funciones complejas de forma aditiva.</p>
+          <p>La conexión con el MLP muestra que una red feed-forward con una capa oculta puede interpretarse como un modelo de regresión no paramétrica aditiva.</p>
+        </article>
+        <article class="card">
+          <div class="card-heading"><h3>4.7 Teorema de Kolmogorov</h3><span class="tag">Representación universal</span></div>
+          <p>El teorema de superposición establece que toda función continua multivariable puede representarse exactamente con una red de dos capas ocultas y un número fijo de unidades, <strong>2d + 1</strong>, para una entrada de dimensión d.</p>
+          <p class="callout"><strong>Advertencia práctica:</strong> las funciones de Kolmogorov pueden ser muy poco suaves. Las redes estándar suelen aproximar funciones usando activaciones sigmoidales.</p>
+        </article>
+        <article class="card">
+          <div class="card-heading"><h3>4.8 Retropropagación de errores</h3><span class="tag">Back-propagation</span></div>
+          <div class="grid grid--3">
+            <div><h4>Forward pass</h4><p>Las entradas atraviesan la red capa por capa hasta calcular la salida y el error.</p></div>
+            <div><h4>Backward pass</h4><p>La regla de la cadena propaga el error hacia atrás y calcula las deltas δ de las unidades.</p></div>
+            <div><h4>Actualización</h4><p>Los pesos se mueven en dirección opuesta al gradiente usando la tasa de aprendizaje η.</p></div>
+          </div>
+          <div class="formula formula--small">Δw = −η ∂E/∂w</div>
+        </article>
+        <div class="grid grid--2">
+          <article class="card">
+            <div class="card-heading"><h3>4.9 Matriz Jacobiana</h3><span class="tag">Primer orden</span></div>
+            <p>Contiene las derivadas parciales de las salidas de la red con respecto a las variables de entrada.</p>
+            <div class="formula formula--small">J<sub>ki</sub> = ∂y<sub>k</sub> / ∂x<sub>i</sub></div>
+            <p>Permite estudiar sensibilidad, control óptimo y cambios en la salida ante pequeñas perturbaciones de la entrada.</p>
+          </article>
+          <article class="card">
+            <div class="card-heading"><h3>4.10 Matriz Hessiana</h3><span class="tag">Segundo orden</span></div>
+            <p>Es la matriz de derivadas de segundo orden del error respecto a los pesos.</p>
+            <div class="formula formula--small">H<sub>ij</sub> = ∂²E / (∂w<sub>i</sub>∂w<sub>j</sub>)</div>
+            <p>Describe la curvatura local, ayuda a identificar mínimos locales y se usa en Levenberg–Marquardt y métodos quasi-Newton.</p>
+          </article>
+        </div>
+        <article class="card card--accent">
+          <h3>Conexión de los temas avanzados</h3>
+          <p>Las unidades sigmoidales hacen posible la retropropagación; la Jacobiana describe sensibilidad de primer orden y la Hessiana aporta curvatura de segundo orden. Las simetrías explican por qué diferentes pesos pueden representar la misma función.</p>
+        </article>
+      </section>
+
+      <section class="module module--tools" id="flashcards">
+        <div class="module-heading"><div><p class="module-kicker">Herramienta</p><h2>Flashcards</h2></div><span class="module-icon">✦</span></div>
+        <div class="flashcard" id="flashcard">
+          <span class="tag" id="flashcard-category">Módulo 1</span>
+          <h3 id="flashcard-question">¿Qué representa w en un discriminante lineal?</h3>
+          <p id="flashcard-answer" class="flashcard__answer" hidden>El vector normal a la frontera de decisión; determina su orientación.</p>
+          <button class="button button--primary" id="flashcard-reveal">Mostrar respuesta</button>
+          <button class="button button--ghost" id="flashcard-next">Siguiente tarjeta</button>
+        </div>
+        <p class="progress-text"><span id="cards-studied">0</span> de <span id="cards-total">0</span> tarjetas estudiadas</p>
+      </section>
+
+      <section class="module module--tools" id="error-console">
+        <div class="module-heading"><div><p class="module-kicker">Herramienta</p><h2>Consola de errores frecuentes</h2></div><span class="module-icon">!</span></div>
+        <div class="error-list">
+          <button class="error-item" data-error="lineal"><strong>“Si entreno más, el perceptrón siempre resolverá el problema.”</strong><span>Ver explicación</span></button>
+          <button class="error-item" data-error="svd"><strong>“La inversa de ΦᵀΦ siempre es segura.”</strong><span>Ver explicación</span></button>
+          <button class="error-item" data-error="fisher"><strong>“Fisher puede extraer tantas características como dimensiones.”</strong><span>Ver explicación</span></button>
+          <button class="error-item" data-error="mlp"><strong>“Agregar capas basta para obtener no linealidad.”</strong><span>Ver explicación</span></button>
+        </div>
+        <div class="error-detail" id="error-detail">Selecciona una afirmación para ver por qué es incorrecta.</div>
+      </section>
+
+      <section class="module module--tools" id="exam">
+        <div class="module-heading"><div><p class="module-kicker">Herramienta</p><h2>Simulacro de examen</h2></div><span class="module-icon">✓</span></div>
+        <p class="intro">Responde las cinco preguntas basadas exclusivamente en el contenido suministrado. Puedes revelar la explicación de cada respuesta.</p>
+        <div id="exam-list"></div>
+        <button class="button button--primary" id="exam-score">Calcular resultado</button>
+        <output class="exam-result" id="exam-result"></output>
+      </section>
+    </main>
+  </div>
+  <script src="app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js"));
+    }
+  </script>
+</body>
+</html>

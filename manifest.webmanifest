@@ -1,0 +1,19 @@
+{
+  "name": "Supervised Learning · Bishop 3-4",
+  "short_name": "Bishop 3-4",
+  "description": "Dashboard interactivo para repasar aprendizaje supervisado y redes neuronales.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7f9fc",
+  "theme_color": "#14264e",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
